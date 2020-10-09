@@ -1,10 +1,10 @@
 # Teacher URLs
 from django.urls import path
-from . import views
+from . import views as teacher_views
 
 urlpatterns = [
-    path('', views.home, name='teacher-home'),
-    path('dashboard', views.dashboard, name='teacher-dashboard'),
-    path('upload', views.upload, name='teacher-upload'),
-    path('register', views.register, name='teacher-registration')
+    path('', teacher_views.home, name='teacher-home'),
+    path('dashboard', teacher_views.dashboard, name='teacher-dashboard'),
+    path('upload', teacher_views.upload, name='teacher-upload'),
+    path('register', teacher_views.register, name='teacher-register')
 ]

@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -20,7 +26,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9rls&esy1b^!p)sqmsve%!)lz)87es1)9y$@bapn&j57w04e&+'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,6 +40,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'student.apps.StudentConfig',
     'teacher.apps.TeacherConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,5 +128,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
+
+# BASE_DIR is a variable created by django that specifies the base directory of our project
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# when we upload an image it will create a profile pics directory inside the media directory, the url allows us to access in the browser
+MEDIA_URL = '/media/'
+
+# form formatting
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# login-redirect view handles logic for determining which user has logged in
+LOGIN_REDIRECT_URL = 'login-redirect'
+LOGIN_URL = 'login'
