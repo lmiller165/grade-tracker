@@ -13,6 +13,7 @@ def home(request):
 @login_required
 def dashboard(request):
     first_name = request.user.get_short_name()
+    
     return render(request, 'teacher/dashboard.html', {'first_name': first_name})
 
 
