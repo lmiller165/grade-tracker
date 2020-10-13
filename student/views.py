@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from main.models import Grade, Gpa
+from main.api import charts
 from student.services import get_first_name
-import json
+
 
 
 def home(request):
@@ -17,36 +18,8 @@ def dashboard(request):
     grades =Grade.objects.filter(student=request.user).all()
     first_name = get_first_name(request.user.get_short_name())
     gpas = Gpa.objects.filter(student=request.user).all()
+    gpa_chart_json = charts.get_gpa_chart_data(gpas)
 
-    gpa_chart_data = {
-        'labels': [
-            'Week 1',
-            'Week 2',
-            'Week 3',
-            'Week 4',
-            'Week 5',
-            'Week 6',
-            'Week 7',
-            'Week 8',
-            'Week 9',
-            'Week 10',
-            'Week 11',
-            'Week 12',
-            'Week 13',
-            'Week 14',
-            'Week 15',
-            'Week 16',
-            'Week 17',
-            'Week 18',
-
-        ],
-        'data': [],
-    }
-
-    for gpa in gpas:
-        gpa_chart_data['data'].append(gpa.gpa)
-
-    gpa_chart_json = json.dumps(gpa_chart_data)
 
     context = {
         'first_name': first_name,
