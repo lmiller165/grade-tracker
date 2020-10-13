@@ -12,10 +12,6 @@ class CSV:
     def __init__(self, my_csv):
         with open(f'./media/csv/{my_csv}', mode='r') as csv_file:
             self.csv = csv.reader(csv_file)
-            # update csv to start with first student
-            # next(self.csv)
-            # next(self.csv)
-            # next(self.csv)
             self.csv = list(self.csv)
             # save column names
             self.columns = list(self.csv[2])
@@ -28,14 +24,11 @@ class CSV:
         Find any students that are not registered as users
         and create a new user for them with student profile.
         """
-        
-        # TODO: Fix how emails are added if we are given emails upfront
+        # TODO: Fix how emails are added if we are able to export emails
         counter = 0
-
         for entry in self.csv:
             counter += 1
             if not Student.objects.filter(calstudentID=entry[3]).exists():
-
                 name = entry[2]
                 name = name.split(', ')
                 last_name = name[0]
@@ -67,7 +60,7 @@ class CSV:
         Will look for any unregistered coursed and create a course if not found.
         """
         for subject in self.columns[10:]:
-            # TODO: don't hardcode term, make it more programatic
+            # TODO: ask for term start and end date when registering course
             if not Course.objects.filter(title=subject).exists():
                 course = Course.objects.create(
                     title=subject,
@@ -76,14 +69,13 @@ class CSV:
                 )
                 course.save()
 
-            
-
     def add_student_grades_gpa(self):
         """
-        Add all new grades for each student
+        Add all new grades for each student.
+        Calculates and adds gpa
+        Registers student in courses
         """
-
- 
+        #TODO: Break up this method
 
         for entry in self.csv:
             gpa_sum = 0.0
@@ -100,13 +92,10 @@ class CSV:
                         grade=grade
                     )
                     grade.save()
-
+                    student.courses.add(course)
                     gpa_sum += (self.get_gpa_value(int(grade.grade))) * c.DEFAULT_CREDIT_HOURS
                     hours_attempted += c.DEFAULT_CREDIT_HOURS
     
-
-            print(f'name: {entry[2]} grade: {grade} in {self.columns[i]}')
-
             gpa = round((gpa_sum/hours_attempted), 2)
             gpa = Gpa.objects.create(
                 student=user,
@@ -138,8 +127,6 @@ class CSV:
         }
 
         return gpa_values[grade]
-
-
 
 
 def parse_csv_file(my_csv):

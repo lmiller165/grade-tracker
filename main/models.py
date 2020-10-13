@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from .managers import CustomUserManager
-from student.models import Student
 
 
 
@@ -20,6 +19,9 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta:
+        ordering = ['last_name']
+
     objects = CustomUserManager()
 
     def __str__(self):
@@ -34,12 +36,14 @@ class Course(models.Model):
     section = models.CharField(max_length=20, null=True)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='course_teacher', on_delete=models.CASCADE, null=True)
     secondary_instructor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='secondary_teacher', on_delete=models.CASCADE, blank=True, null=True)
-    students = models.ManyToManyField(Student)
     term = models.CharField(max_length=10, null=True, blank=True)
     credit_hours = models.FloatField(null=True)
     description = models.TextField(max_length=None, null=True, blank=True)
     start_date = models.DateField( auto_now_add=True, null=True)
     end_date = models.DateField( auto_now_add=True, null=True)
+
+    class Meta:
+        ordering = ['title']
 
     def __str__(self):
         return self.title

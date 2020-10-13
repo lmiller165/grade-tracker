@@ -1,4 +1,10 @@
 {% extends 'main/base.html' %}
 {% block content %}
     <h1>Teacher Dashboard for {{ first_name }}</h1>
+
+    {% for student in students %}
+    <h6><a href='#'> {{ student.user.last_name }}, {{ student.user.first_name }}</a></h6>
+    {% endfor %}
+
+
 {% endblock %}

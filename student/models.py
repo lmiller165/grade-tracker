@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from main.models import Course
 
 class Student(models.Model):
     """
@@ -31,6 +32,7 @@ class Student(models.Model):
     ell_status = models.CharField(max_length=50, null=True, choices=ELL_CHOICES) #ELL, English Language Learner
     on_reduced_lunch = models.BooleanField(default=False, null=True) #Some students who qualify for reduced lunch
     race = models.CharField(max_length=50, null=True, choices=RACE_CHOICES)
+    courses = models.ManyToManyField(Course)
 
     def __str__(self):
         return f'{self.user} Profile'
