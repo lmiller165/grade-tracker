@@ -1,5 +1,5 @@
 # Grade Tracker
-*Note: project in active development*
+*Note: project in active development*  
 *Working with KIPP SF College Prep to gain access to PowerSchool API*
 
 ## Project Outcome Goals
