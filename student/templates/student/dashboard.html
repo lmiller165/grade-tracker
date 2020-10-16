@@ -7,17 +7,17 @@
         <div>
             <img class="img-thumbnail" src='{{ user.student.profile_img.url }}' style="width:100px;height:100px;">
             <!-- <img class="img-thumbnail" src='/media/profile_imgs/headshot_square.jpg'> -->
-            <h2 class="account-heading">Hello {{ first_name }}!</h2>
+            <h2 class="account-heading">Hello {{ user.first_name }}!</h2>
             <p class='text-secondary'>{{ user.email }}</p>
             <br>
             <br>
             <h4>Current Grades:</h4>
-            {% for grade in grades %}
+            {% for grade in user.grades.all %}
             <h6>{{ grade.course }}: {{ grade.grade }}</h6>
             {% endfor %}
             <h4>Current Gpas:</h4>
-            {% for gpa in gpas %}
-            <h6>{{ gpa.timestamp }}: {{ gpa.gpa }}</h6>
+            {% for gpa in user.gpa.all %}
+            <h6>{{ gpa.gpa }}</h6>
             {% endfor %}
         </div>
     </div>

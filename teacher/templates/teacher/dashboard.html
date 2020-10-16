@@ -2,9 +2,40 @@
 {% block content %}
     <h1>Teacher Dashboard for {{ first_name }}</h1>
 
-    {% for student in students %}
-    <h6><a href='#'> {{ student.user.last_name }}, {{ student.user.first_name }}</a></h6>
+
+    {% for class, students in roster.items %}
+        <h4>{{ class }}</h4>
+        {% for student in students %}
+            <a href="{% url 'student-detail' student.id %}"><p>{{ student.user.last_name }}, {{ student.user.first_name }}</p></a>
+        {% endfor %}
     {% endfor %}
+
+    <!-- {% for class in students %}
+        <h4>{{ class }}</h4>
+        {% for inv_student in class %}
+            <p>{{ inv_student.user.last_name }}, {{ inv_student.user.first_name }}</p>
+        {% endfor %}
+    {% endfor %}
+
+    {% for class in roster %}
+        <p>{{ class }}</p>
+
+        
+    {% endfor %} -->
+    <!-- {{ roster }} -->
+
+    <!-- {% for class in roster %}
+        <h4>{{ class }}</h6> -->
+        
+
+        <!-- <p>{{ class.student.user.last_name }}, {{ class.student.user.first_name }}</p> -->
+        
+
+        
+        
+            <!-- <p><a href='#'> {{ course.student.user.last_name }}, {{ student.user.first_name }}</a></p> -->
+        
+    <!-- {% endfor %} -->
 
 
 {% endblock %}
