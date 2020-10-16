@@ -1,6 +1,5 @@
 # Grade Tracker
-*Note: project in active development*  
-*Working with KIPP SF College Prep to gain access to PowerSchool API*
+*Note: project in active development and working with KIPP SF College Prep to gain access to PowerSchool API*  
 
 ## Project Outcome Goals
 Track both academics and student's daily emotion levels using PowerSchool API and Google's sentiment analysis to analyze journal entries.
