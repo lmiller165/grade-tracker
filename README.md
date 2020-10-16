@@ -12,4 +12,4 @@ Students will be able to view charted GPA history for each semester and set a GP
 Teachers will be able to view a list of all their students and see personalized student dashboards to provide a quick snapshot of student progress and help facilitate more meaningful 1:1 conversations.
 
 ## Personal Educational Goals:
-To become familiar with Docker, Django, and React and deploy a working application.
+To become familiar with Docker, Django, React and deploy a working application.
