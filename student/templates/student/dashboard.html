@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
+
 {% block content %}
-    <h1>Student Dashboard</h1>
     <br>
     <br>
     <div class='content-section'>
@@ -11,9 +11,13 @@
             <p class='text-secondary'>{{ user.email }}</p>
             <br>
             <br>
+            <canvas id="myChart" width="400" height="180"></canvas>
             <h4>Current Grades:</h4>
-            {% for grade in user.grades.all %}
-            <h6>{{ grade.course }}: {{ grade.grade }}</h6>
+ 
+            {% for class, grade in latest_class_avgs.items %}
+                <div>
+                    <p>{{ class }}: {{ grade }}</p>
+                </div>
             {% endfor %}
             <h4>Current Gpas:</h4>
             {% for gpa in user.gpa.all %}
@@ -21,7 +25,7 @@
             {% endfor %}
         </div>
     </div>
-    <canvas id="myChart" width="400" height="180"></canvas>
+
 
 
 
@@ -71,6 +75,5 @@
     </script>
 
 
-
-
 {% endblock %}
+
